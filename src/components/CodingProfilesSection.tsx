@@ -34,6 +34,14 @@ const profiles = [
     url: "https://www.codechef.com/users/logic_craver12",
     icon: "CC",
   },
+  {
+    name: "Codeforces",
+    rating: "Active",
+    color: "from-blue-500 to-indigo-600",
+    bgColor: "bg-blue-500/10",
+    url: "https://codeforces.com/profile/mavishsiraj1",
+    icon: "CF",
+  },
 ];
 
 const CodingProfilesSection = () => {
