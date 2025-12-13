@@ -4,10 +4,10 @@ import { Code, ExternalLink } from "lucide-react";
 const profiles = [
   {
     name: "LeetCode",
-    rating: "1706",
+    rating: "1769",
     color: "from-amber-500 to-orange-500",
     bgColor: "bg-amber-500/10",
-    url: "https://leetcode.com/",
+    url: "https://leetcode.com/u/mavishsiraj1/",
     icon: "LC",
   },
   {
@@ -15,7 +15,7 @@ const profiles = [
     rating: "1704",
     color: "from-green-500 to-emerald-600",
     bgColor: "bg-green-500/10",
-    url: "https://www.geeksforgeeks.org/",
+    url: "https://www.geeksforgeeks.org/profile/mavishhaq?tab=activity",
     icon: "GFG",
   },
   {
@@ -27,19 +27,11 @@ const profiles = [
     icon: "GH",
   },
   {
-    name: "HackerRank",
-    rating: "5★",
-    color: "from-green-600 to-teal-600",
-    bgColor: "bg-teal-500/10",
-    url: "https://www.hackerrank.com/",
-    icon: "HR",
-  },
-  {
     name: "CodeChef",
     rating: "Active",
     color: "from-amber-700 to-amber-900",
     bgColor: "bg-amber-700/10",
-    url: "https://www.codechef.com/",
+    url: "https://www.codechef.com/users/logic_craver12",
     icon: "CC",
   },
 ];
