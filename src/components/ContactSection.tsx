@@ -69,7 +69,7 @@ const ContactSection = () => {
               <Linkedin className="w-6 h-6 group-hover:scale-110 transition-transform" />
             </a>
             <a
-              href="https://github.com/taibasiraj"
+              href="https://github.com/mavishsiraj"
               target="_blank"
               rel="noopener noreferrer"
               className="w-14 h-14 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 group"
