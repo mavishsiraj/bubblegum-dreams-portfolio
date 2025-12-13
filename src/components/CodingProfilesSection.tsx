@@ -23,7 +23,7 @@ const profiles = [
     rating: "Active",
     color: "from-gray-600 to-gray-800",
     bgColor: "bg-gray-500/10",
-    url: "https://github.com/taibasiraj",
+    url: "https://github.com/mavishsiraj",
     icon: "GH",
   },
   {
