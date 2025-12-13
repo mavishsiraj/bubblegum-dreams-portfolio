@@ -79,7 +79,7 @@ const ContactSection = () => {
           </div>
 
           <p className="font-body text-muted-foreground text-sm">
-            Currently looking for SDE internship opportunities 🚀
+            Currently looking for SDE internship opportunities
           </p>
         </div>
 

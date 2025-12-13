@@ -58,7 +58,7 @@ const AboutSection = () => {
               </p>
               <p className="font-body text-muted-foreground leading-relaxed">
                 When I'm not coding, you'll find me participating in hackathons, solving DSA problems, 
-                or exploring the latest in tech! 🚀
+                or exploring the latest in tech!
               </p>
             </div>
 
