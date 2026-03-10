@@ -93,13 +93,6 @@ const ContactSection = () => {
           </p>
         </div>
 
-        {/* Back to top button */}
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-lg hover:scale-110 transition-all duration-300 flex items-center justify-center animate-bounce-soft"
-        >
-          <ArrowUp className="w-5 h-5" />
-        </button>
       </div>
     </section>
   );

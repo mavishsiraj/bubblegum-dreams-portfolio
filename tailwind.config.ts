@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         display: ["Pacifico", "cursive"],
-        body: ["Quicksand", "sans-serif"],
+        body: ["'Plus Jakarta Sans'", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -118,13 +118,9 @@ export default {
           "0%": { opacity: "0", transform: "scale(0.9)" },
           "100%": { opacity: "1", transform: "scale(1)" },
         },
-        "typing": {
-          "0%": { width: "0" },
-          "100%": { width: "100%" },
-        },
         "blink": {
-          "0%, 100%": { borderColor: "transparent" },
-          "50%": { borderColor: "hsl(var(--primary))" },
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0" },
         },
         "sparkle": {
           "0%, 100%": { opacity: "1", transform: "scale(1)" },
@@ -153,7 +149,6 @@ export default {
         "slide-in-right": "slide-in-right 0.6s ease-out forwards",
         "fade-in": "fade-in 0.5s ease-out forwards",
         "scale-in": "scale-in 0.4s ease-out forwards",
-        "typing": "typing 3s steps(30) forwards",
         "blink": "blink 1s step-end infinite",
         "sparkle": "sparkle 1.5s ease-in-out infinite",
         "rotate-slow": "rotate-slow 20s linear infinite",
