@@ -12,12 +12,14 @@ import ContactSection from "@/components/ContactSection";
 import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
+import FloatingSparkles from "@/components/FloatingSparkles";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background font-body overflow-x-hidden grain-overlay">
       <CustomCursor />
       <ScrollProgress />
+      <FloatingSparkles />
       <FloatingBubbles />
       <Navbar />
       <main>

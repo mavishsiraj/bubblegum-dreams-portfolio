@@ -46,7 +46,9 @@ const achievements = [
 
 const AchievementsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -55,6 +57,26 @@ const AchievementsSection = () => {
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const observers = cardRefs.current.map((card, index) => {
+      if (!card) return null;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisibleCards((prev) => [...prev, index]);
+          }
+        },
+        { threshold: 0.2 }
+      );
+      observer.observe(card);
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((observer) => observer?.disconnect());
+    };
   }, []);
 
   return (
@@ -72,8 +94,14 @@ const AchievementsSection = () => {
           {achievements.map((ach, index) => (
             <div
               key={ach.title}
-              className={`${isVisible ? (index % 2 === 0 ? "animate-slide-from-left" : "animate-slide-from-right") : "opacity-0"}`}
-              style={{ animationDelay: `${0.2 + index * 0.15}s` }}
+              ref={(el) => (cardRefs.current[index] = el)}
+              className={`transition-all duration-700 ${
+                visibleCards.includes(index)
+                  ? "opacity-100 translate-x-0"
+                  : index % 2 === 0
+                  ? "opacity-0 -translate-x-20"
+                  : "opacity-0 translate-x-20"
+              }`}
             >
               <div className="glass rounded-2xl p-6 md:p-8 flex items-center gap-6 hover:scale-[1.02] transition-all duration-300 group"
                 style={{ boxShadow: "0 0 0 transparent" }}

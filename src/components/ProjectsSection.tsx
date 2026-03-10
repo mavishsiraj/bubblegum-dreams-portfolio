@@ -77,9 +77,9 @@ const ProjectsSection = () => {
               className={`group relative ${isVisible ? "animate-scale-in" : "opacity-0"}`}
               style={{ animationDelay: `${0.2 + index * 0.15}s` }}
             >
-              <div className="glass rounded-3xl overflow-hidden h-full flex flex-col hover:scale-[1.02] transition-all duration-500 hover:shadow-2xl"
+              <div className="glass rounded-3xl overflow-hidden h-full flex flex-col hover:scale-[1.02] transition-all duration-500"
                 style={{ boxShadow: "0 0 0 0 transparent" }}
-                onMouseEnter={(e) => e.currentTarget.style.boxShadow = "0 8px 40px hsl(var(--primary) / 0.2)"}
+                onMouseEnter={(e) => e.currentTarget.style.boxShadow = "0 10px 50px hsl(var(--primary) / 0.4)"}
                 onMouseLeave={(e) => e.currentTarget.style.boxShadow = "0 0 0 0 transparent"}
               >
                 {/* Gradient top border */}
@@ -87,13 +87,16 @@ const ProjectsSection = () => {
 
                 {/* Video demo area */}
                 <div
-                  className="relative bg-foreground/5 h-40 flex items-center justify-center cursor-pointer group/video"
+                  className="relative bg-foreground/10 h-48 flex items-center justify-center cursor-pointer group/video rounded-t-2xl overflow-hidden"
                   onClick={() => openModal(project.title)}
                 >
-                  <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center group-hover/video:scale-110 transition-transform">
-                    <Play className="w-6 h-6 text-primary ml-1" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10" />
+                  <div className="relative w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover/video:scale-110 transition-all duration-300 shadow-lg"
+                    style={{ boxShadow: "0 0 30px hsl(var(--primary) / 0.5)" }}
+                  >
+                    <Play className="w-7 h-7 text-primary-foreground ml-1" />
                   </div>
-                  <span className="absolute bottom-3 right-3 font-body text-xs text-muted-foreground/60">Coming Soon</span>
+                  <span className="absolute bottom-3 right-3 font-body text-xs text-muted-foreground/60">Demo Video</span>
                 </div>
 
                 <div className="p-6 flex-1 flex flex-col">
@@ -132,19 +135,22 @@ const ProjectsSection = () => {
 
       {/* Video modal */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/50 backdrop-blur-sm animate-fade-in" onClick={() => setModalOpen(false)}>
-          <div className="glass-dark rounded-3xl p-6 max-w-2xl w-full mx-4 animate-scale-in" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md animate-fade-in" onClick={() => setModalOpen(false)}>
+          <div className="glass-dark rounded-3xl p-6 max-w-4xl w-full mx-4 animate-scale-in" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-body font-bold text-lg text-foreground">{selectedProject}</h3>
-              <button onClick={() => setModalOpen(false)} className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors">
-                <X className="w-4 h-4 text-foreground" />
+              <button onClick={() => setModalOpen(false)} className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center hover:bg-primary/30 transition-colors">
+                <X className="w-5 h-5 text-foreground" />
               </button>
             </div>
-            <div className="aspect-video bg-foreground/5 rounded-2xl flex items-center justify-center">
-              <div className="text-center">
-                <Play className="w-12 h-12 text-muted-foreground/40 mx-auto mb-2" />
-                <p className="font-body text-muted-foreground">Video demo coming soon</p>
-              </div>
+            <div className="aspect-video bg-foreground/5 rounded-2xl overflow-hidden">
+              <iframe
+                src=""
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title="Project Demo"
+              />
             </div>
           </div>
         </div>

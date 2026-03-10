@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { ChevronDown } from "lucide-react";
 import SparkleParticles from "./SparkleParticles";
+import DreamyBubbles from "./DreamyBubbles";
 
 const roles = ["Aspiring SDE", "Problem Solver", "Hackathon Finalist", "LeetCode Knight"];
 
@@ -60,6 +61,7 @@ const HeroSection = () => {
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center relative px-4 overflow-hidden">
+      <DreamyBubbles />
       <SparkleParticles />
 
       {/* Gradient mesh blobs */}
@@ -75,12 +77,16 @@ const HeroSection = () => {
               {photos.map((photo, i) => (
                 <div
                   key={i}
-                  className={`absolute inset-0 flex items-center justify-center bg-gradient-to-br ${photo.color} transition-opacity duration-1000 ${
+                  className={`absolute inset-0 transition-opacity duration-1000 ${
                     i === photoIndex ? "opacity-100" : "opacity-0"
                   }`}
                   style={{ animation: i === photoIndex ? "ken-burns 4s ease-out forwards" : undefined }}
                 >
-                  <span className="font-body text-sm text-muted-foreground font-medium">[{photo.label}]</span>
+                  <img
+                    src=""
+                    alt={`Profile ${i + 1}`}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               ))}
             </div>
