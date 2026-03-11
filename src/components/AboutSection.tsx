@@ -62,17 +62,21 @@ const AboutSection = () => {
               </p>
             </div>
 
-            {/* Profile image placeholder with gradient border */}
-            <div className="flex justify-center">
-              <div className="relative">
-                <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-br from-primary via-secondary to-accent p-1 animate-pulse-glow">
-                  <div className="w-full h-full rounded-full bg-card flex items-center justify-center">
-                    <span className="font-display text-6xl gradient-text">TS</span>
+            {/* Profile image */}
+            <div className="flex justify-center relative z-10">
+              <div className="relative hover:scale-105 transition-transform duration-500">
+                <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-br from-primary via-secondary to-accent p-1.5 animate-pulse-glow shadow-[0_0_30px_rgba(var(--primary),0.3)]">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-card">
+                    <img
+                      src="/profile.jpg"
+                      alt="Taiba Siraj"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
                 {/* Floating decorations */}
-                <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary/40 animate-bounce-soft" />
-                <div className="absolute -bottom-4 -left-4 w-6 h-6 rounded-full bg-secondary/40 animate-float" />
+                <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary/40 animate-bounce-soft mix-blend-screen" />
+                <div className="absolute -bottom-4 -left-4 w-6 h-6 rounded-full bg-secondary/40 animate-float mix-blend-screen" />
               </div>
             </div>
           </div>
@@ -81,15 +85,31 @@ const AboutSection = () => {
         {/* Skills */}
         <div className={`mt-12 ${isVisible ? "animate-slide-up" : "opacity-0"}`} style={{ animationDelay: "0.4s" }}>
           <h3 className="font-body font-semibold text-xl text-center mb-8 text-foreground">Tech Stack</h3>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6 max-w-3xl mx-auto">
             {skills.map((skill, index) => (
               <div
                 key={skill.name}
-                className="group glass px-6 py-3 rounded-full flex items-center gap-2 hover:scale-110 transition-transform duration-300 cursor-default"
+                className="group relative px-6 py-4 rounded-2xl flex items-center gap-3 cursor-default overflow-hidden bg-card/40 backdrop-blur-xl border border-white/10 hover:border-white/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(var(--primary),0.5)]"
                 style={{ animationDelay: `${0.5 + index * 0.1}s` }}
               >
-                <skill.icon className={`w-5 h-5 ${skill.color} group-hover:animate-wiggle`} />
-                <span className="font-body font-medium text-foreground">{skill.name}</span>
+                {/* Hover gradient background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Icon container */}
+                <div className="relative p-2 rounded-xl bg-background/50 group-hover:scale-110 transition-transform duration-500 shadow-inner z-10">
+                  <skill.icon className={`w-6 h-6 ${skill.color} group-hover:animate-wiggle`} />
+                  <div className={`absolute inset-0 rounded-xl bg-current opacity-20 blur-md -z-10 ${skill.color} group-hover:opacity-100 transition-opacity duration-500`} />
+                </div>
+                
+                <span className="font-body font-semibold text-foreground tracking-wide relative z-10">{skill.name}</span>
+                
+                {/* Animated border glow */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                  <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
+                  <div className="absolute inset-y-0 left-0 w-[2px] bg-gradient-to-b from-transparent via-secondary to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent" />
+                  <div className="absolute inset-y-0 right-0 w-[2px] bg-gradient-to-b from-transparent via-primary to-transparent" />
+                </div>
               </div>
             ))}
           </div>

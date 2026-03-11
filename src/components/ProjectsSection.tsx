@@ -1,42 +1,79 @@
 import { useEffect, useRef, useState } from "react";
 import { ExternalLink, Github, Globe, Trophy, ShoppingBag, Play, X } from "lucide-react";
 
+interface TreeNode {
+  label: string;
+  children?: TreeNode[];
+}
+
 const projects = [
   {
     title: "Personal Portfolio Website",
     description: "A beautiful, animated portfolio website showcasing my skills, projects, and achievements with modern design and smooth animations.",
-    tech: ["HTML/CSS/JS", "AWS S3", "Render", "Netlify"],
+    tech: ["React", "Tailwind CSS", "TypeScript", "Vite"],
     icon: Globe,
     gradient: "from-primary to-secondary",
     github: "https://github.com/mavishsiraj",
     videoId: "",
+    tree: {
+      label: "Portfolio",
+      children: [
+        { label: "Frontend", children: [{ label: "React" }, { label: "TypeScript" }] },
+        { label: "Styling", children: [{ label: "Tailwind" }, { label: "Animations" }] },
+        { label: "Build", children: [{ label: "Vite" }] },
+      ],
+    } as TreeNode,
   },
   {
-    title: "Project 2",
-    description: "Coming soon — an exciting project currently in development. Stay tuned for updates!",
-    tech: ["Coming Soon"],
+    title: "Perfume E-commerce Platform",
+    description: "Architected a full-stack platform with JWT auth on AWS EC2, supporting 1K+ concurrent users; engineered catalogue, cart, and order tracking modules.",
+    tech: ["Spring Boot", "Docker", "AWS EC2", "HTML/CSS/JS"],
     icon: ShoppingBag,
     gradient: "from-secondary to-accent",
     github: "https://github.com/mavishsiraj",
-    videoId: "",
+    videoId: "/perfume-demo.mp4",
+    tree: {
+      label: "E-commerce",
+      children: [
+        { label: "Backend", children: [{ label: "Spring Boot" }, { label: "JWT Auth" }] },
+        { label: "Deploy", children: [{ label: "Docker" }, { label: "AWS EC2" }] },
+        { label: "Frontend", children: [{ label: "HTML/CSS/JS" }] },
+      ],
+    } as TreeNode,
   },
   {
-    title: "Google Girls Hackathon 2025",
-    description: "Semi-finalist project for Google Girls Hackathon 2025. Built an innovative solution competing against top participants nationwide.",
-    tech: ["Python", "ML", "Flask", "React"],
+    title: "Budget Planner — AI Finance App",
+    description: "Built a full-stack finance tracker integrating Groq LLM API for a context-aware AI chat assistant delivering real-time financial advice.",
+    tech: ["Node.js", "MongoDB", "React", "Groq API"],
     icon: Trophy,
     gradient: "from-accent to-primary",
     github: "https://github.com/mavishsiraj",
     videoId: "",
+    tree: {
+      label: "Finance App",
+      children: [
+        { label: "Backend", children: [{ label: "Node.js" }, { label: "MongoDB" }] },
+        { label: "AI", children: [{ label: "Groq LLM" }, { label: "Chat Bot" }] },
+        { label: "Frontend", children: [{ label: "React" }] },
+      ],
+    } as TreeNode,
   },
   {
-    title: "Flipkart GRID 7.0",
-    description: "Semi-finalist project for Flipkart GRID 7.0. Competed in one of India's largest tech challenges with a scalable solution.",
-    tech: ["Spring Boot", "Docker", "AWS", "MySQL"],
-    icon: Trophy,
+    title: "Ticket Genius — AI Support System",
+    description: "Built an AI ticketing system processing 1K+ tickets/week with automated classification and agent assignment using Gemini API.",
+    tech: ["Flask", "MySQL", "Gemini API", "Python"],
+    icon: Globe,
     gradient: "from-primary via-accent to-secondary",
     github: "https://github.com/mavishsiraj",
     videoId: "",
+    tree: {
+      label: "AI Ticketing",
+      children: [
+        { label: "Backend", children: [{ label: "Flask" }, { label: "Python" }] },
+        { label: "AI", children: [{ label: "Gemini API" }, { label: "Classifier" }] },
+        { label: "Database", children: [{ label: "MySQL" }] },
+      ],
+    } as TreeNode,
   },
 ];
 
@@ -44,6 +81,7 @@ const ProjectsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [selectedVideoId, setSelectedVideoId] = useState<string>("");
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,8 +93,9 @@ const ProjectsSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const openModal = (title: string) => {
+  const openModal = (title: string, videoId: string) => {
     setSelectedProject(title);
+    setSelectedVideoId(videoId);
     setModalOpen(true);
   };
 
@@ -85,18 +124,88 @@ const ProjectsSection = () => {
                 {/* Gradient top border */}
                 <div className={`h-1 bg-gradient-to-r ${project.gradient}`} />
 
-                {/* Video demo area */}
+                {/* Video demo area with tree overlay */}
                 <div
-                  className="relative bg-foreground/10 h-48 flex items-center justify-center cursor-pointer group/video rounded-t-2xl overflow-hidden"
-                  onClick={() => openModal(project.title)}
+                  className="relative bg-foreground/10 h-56 flex items-center justify-center cursor-pointer group/video rounded-t-2xl overflow-hidden"
+                  onClick={() => openModal(project.title, project.videoId)}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10" />
-                  <div className="relative w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover/video:scale-110 transition-all duration-300 shadow-lg"
+                  {project.videoId ? (
+                    <video
+                      src={project.videoId}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      muted
+                      loop
+                      autoPlay
+                      playsInline
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10" />
+                  )}
+                  <div className="absolute inset-0 bg-black/30 group-hover/video:bg-black/70 transition-colors duration-500" />
+
+                  {/* Play button - fades out on hover */}
+                  <div className="relative w-16 h-16 rounded-full bg-primary/90 backdrop-blur-sm flex items-center justify-center transition-all duration-500 shadow-lg group-hover/video:opacity-0 group-hover/video:scale-50"
                     style={{ boxShadow: "0 0 30px hsl(var(--primary) / 0.5)" }}
                   >
                     <Play className="w-7 h-7 text-primary-foreground ml-1" />
                   </div>
-                  <span className="absolute bottom-3 right-3 font-body text-xs text-muted-foreground/60">Demo Video</span>
+
+                  {/* Tree structure overlay - appears on hover */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/video:opacity-100 transition-all duration-500 pointer-events-none px-4">
+                    <div className="flex flex-col items-center gap-1 w-full max-w-xs">
+                      {/* Root node */}
+                      <div className="px-4 py-1.5 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-body font-bold text-xs shadow-lg transform transition-all duration-500 group-hover/video:translate-y-0 translate-y-4 group-hover/video:scale-100 scale-75">
+                        {project.tree.label}
+                      </div>
+
+                      {/* Vertical connector from root */}
+                      <div className="w-[2px] h-3 bg-gradient-to-b from-primary/80 to-primary/30 group-hover/video:scale-y-100 scale-y-0 origin-top transition-transform duration-300 delay-100" />
+
+                      {/* Horizontal line */}
+                      <div className="w-3/4 h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent group-hover/video:scale-x-100 scale-x-0 transition-transform duration-300 delay-150" />
+
+                      {/* Branch row */}
+                      <div className="flex justify-around w-full gap-2">
+                        {project.tree.children?.map((branch, bIdx) => (
+                          <div key={bIdx} className="flex flex-col items-center gap-1 flex-1"
+                            style={{ transitionDelay: `${200 + bIdx * 80}ms` }}
+                          >
+                            {/* Vertical line to branch */}
+                            <div className="w-[2px] h-2 bg-primary/40 group-hover/video:scale-y-100 scale-y-0 origin-top transition-transform duration-200"
+                              style={{ transitionDelay: `${200 + bIdx * 80}ms` }}
+                            />
+
+                            {/* Branch node */}
+                            <div className="px-3 py-1 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white font-body font-semibold text-[10px] shadow-md transform transition-all duration-300 group-hover/video:translate-y-0 translate-y-3 group-hover/video:opacity-100 opacity-0 whitespace-nowrap"
+                              style={{ transitionDelay: `${250 + bIdx * 80}ms` }}
+                            >
+                              {branch.label}
+                            </div>
+
+                            {/* Vertical connector to leaves */}
+                            <div className="w-[1px] h-2 bg-primary/30 group-hover/video:scale-y-100 scale-y-0 origin-top transition-transform duration-200"
+                              style={{ transitionDelay: `${350 + bIdx * 80}ms` }}
+                            />
+
+                            {/* Leaf nodes */}
+                            <div className="flex flex-col items-center gap-1">
+                              {branch.children?.map((leaf, lIdx) => (
+                                <div
+                                  key={lIdx}
+                                  className="px-2 py-0.5 rounded-full bg-primary/20 border border-primary/30 text-primary-foreground font-body text-[9px] font-medium transform transition-all duration-300 group-hover/video:translate-y-0 translate-y-3 group-hover/video:opacity-100 opacity-0 whitespace-nowrap"
+                                  style={{ transitionDelay: `${400 + bIdx * 80 + lIdx * 60}ms` }}
+                                >
+                                  {leaf.label}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <span className="absolute bottom-3 right-3 font-body text-xs text-white/60">{project.videoId ? "Watch Demo" : "Hover to explore"}</span>
                 </div>
 
                 <div className="p-6 flex-1 flex flex-col">
@@ -144,13 +253,18 @@ const ProjectsSection = () => {
               </button>
             </div>
             <div className="aspect-video bg-foreground/5 rounded-2xl overflow-hidden">
-              <iframe
-                src=""
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title="Project Demo"
-              />
+              {selectedVideoId ? (
+                <video
+                  src={selectedVideoId}
+                  className="w-full h-full"
+                  controls
+                  autoPlay
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <p className="font-body text-muted-foreground">Demo video coming soon!</p>
+                </div>
+              )}
             </div>
           </div>
         </div>

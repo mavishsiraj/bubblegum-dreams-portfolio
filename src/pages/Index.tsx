@@ -19,8 +19,7 @@ const Index = () => {
     <div className="min-h-screen bg-background font-body overflow-x-hidden grain-overlay">
       <CustomCursor />
       <ScrollProgress />
-      <FloatingSparkles />
-      <FloatingBubbles />
+      <ScrollProgress />
       <Navbar />
       <main>
         <HeroSection />

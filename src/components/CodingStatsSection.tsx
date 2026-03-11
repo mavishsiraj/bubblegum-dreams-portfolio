@@ -229,6 +229,46 @@ const CodingStatsSection = () => {
               </ResponsiveContainer>
             </div>
           </div>
+
+          {/* Badge Gallery */}
+          <div className="mt-10 pt-8 border-t border-primary/10">
+            <h3 className="font-body font-semibold text-sm text-muted-foreground mb-6 text-center tracking-widest uppercase">Badges Earned</h3>
+            <div className="flex flex-wrap justify-center gap-6 md:gap-10">
+              {[
+                { name: "Knight", date: "Mar 2026", img: "https://leetcode.com/static/images/badges/2024/gif/2024-11.gif", glow: "rgba(120,180,255,0.5)" },
+                { name: "365 Days", date: "Sep 2025", img: "https://leetcode.com/static/images/badges/2024/gif/2024-09.gif", glow: "rgba(255,200,60,0.5)" },
+                { name: "100 Days", date: "Sep 2025", img: "https://assets.leetcode.com/static_assets/marketing/2024-100.gif", glow: "rgba(100,200,255,0.5)" },
+                { name: "50 Days", date: "Feb 2026", img: "https://assets.leetcode.com/static_assets/marketing/2024-50.gif", glow: "rgba(80,220,140,0.5)" },
+                { name: "100 Days", date: "Jun 2025", img: "https://assets.leetcode.com/static_assets/marketing/2024-100.gif", glow: "rgba(100,200,255,0.5)" },
+                { name: "50 Days", date: "Jun 2025", img: "https://assets.leetcode.com/static_assets/marketing/2024-50.gif", glow: "rgba(80,220,140,0.5)" },
+                { name: "50 Days", date: "Sep 2024", img: "https://assets.leetcode.com/static_assets/marketing/2024-50.gif", glow: "rgba(80,220,140,0.5)" },
+              ].map((badge, i) => (
+                <div
+                  key={i}
+                  className="group flex flex-col items-center gap-2 cursor-default"
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                >
+                  <div
+                    className="relative w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden group-hover:scale-125 transition-transform duration-500"
+                    style={{
+                      boxShadow: `0 0 0 transparent`,
+                      transition: "transform 0.5s ease, box-shadow 0.5s ease",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.boxShadow = `0 0 30px 6px ${badge.glow}`)}
+                    onMouseLeave={(e) => (e.currentTarget.style.boxShadow = `0 0 0 transparent`)}
+                  >
+                    <img
+                      src={badge.img}
+                      alt={badge.name}
+                      className="w-full h-full object-contain p-1"
+                    />
+                  </div>
+                  <span className="font-body text-xs font-semibold text-foreground/80 group-hover:text-primary transition-colors">{badge.name}</span>
+                  <span className="font-body text-[10px] text-muted-foreground">{badge.date}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

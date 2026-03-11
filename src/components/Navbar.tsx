@@ -34,19 +34,7 @@ const Navbar = () => {
         isScrolled ? "glass py-3" : "py-6"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
-        {/* Logo */}
-        <a
-          href="#"
-          className="font-display text-2xl gradient-text hover:scale-105 transition-transform"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-        >
-          TS
-        </a>
-
+      <div className="max-w-6xl mx-auto px-4 flex items-center justify-center relative w-full h-10">
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
@@ -64,7 +52,7 @@ const Navbar = () => {
         {/* Mobile menu button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden w-10 h-10 flex items-center justify-center"
+          className="md:hidden absolute right-4 w-10 h-10 flex items-center justify-center"
         >
           {isMobileMenuOpen ? (
             <X className="w-6 h-6 text-foreground" />

@@ -1,7 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
 import { ChevronDown } from "lucide-react";
-import SparkleParticles from "./SparkleParticles";
-import DreamyBubbles from "./DreamyBubbles";
 
 const roles = ["Aspiring SDE", "Problem Solver", "Hackathon Finalist", "LeetCode Knight"];
 
@@ -16,7 +14,6 @@ const HeroSection = () => {
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const [photoIndex, setPhotoIndex] = useState(0);
 
   // Typewriter cycling effect
   const tick = useCallback(() => {
@@ -41,28 +38,23 @@ const HeroSection = () => {
     return () => clearTimeout(timer);
   }, [tick, isDeleting]);
 
-  // Photo slideshow
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setPhotoIndex((prev) => (prev + 1) % 3);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
-
   const scrollToAbout = () => {
     document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const photos = [
-    { label: "PHOTO_1", color: "from-primary/30 to-secondary/30" },
-    { label: "PHOTO_2", color: "from-secondary/30 to-accent/30" },
-    { label: "PHOTO_3", color: "from-accent/30 to-primary/30" },
-  ];
-
   return (
     <section className="min-h-screen flex flex-col items-center justify-center relative px-4 overflow-hidden">
-      <DreamyBubbles />
-      <SparkleParticles />
+      {/* Animated Creative Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-0 bg-background/50 backdrop-blur-[1px] z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-background/50 z-10" />
+        <img
+          src="/profile.jpg"
+          alt="Background"
+          className="w-full h-full object-cover opacity-90 mix-blend-overlay animate-float-slow"
+          style={{ transform: "scale(1.15)" }}
+        />
+      </div>
 
       {/* Gradient mesh blobs */}
       <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-primary/15 blur-3xl animate-float" />
@@ -70,31 +62,6 @@ const HeroSection = () => {
       <div className="absolute bottom-20 left-1/3 w-64 h-64 rounded-full bg-accent/10 blur-3xl animate-float-slow" />
 
       <div className="text-center z-10 flex flex-col items-center">
-        {/* Photo slideshow with animated gradient border */}
-        <div className="mb-8 relative">
-          <div className="animated-border w-48 h-48 md:w-56 md:h-56">
-            <div className="w-full h-full rounded-full overflow-hidden bg-card relative">
-              {photos.map((photo, i) => (
-                <div
-                  key={i}
-                  className={`absolute inset-0 transition-opacity duration-1000 ${
-                    i === photoIndex ? "opacity-100" : "opacity-0"
-                  }`}
-                  style={{ animation: i === photoIndex ? "ken-burns 4s ease-out forwards" : undefined }}
-                >
-                  <img
-                    src=""
-                    alt={`Profile ${i + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          {/* Glow behind */}
-          <div className="absolute inset-0 rounded-full bg-primary/20 blur-2xl -z-10 animate-pulse-glow" />
-        </div>
-
         <div className="mb-3 animate-fade-in">
           <span className="text-lg md:text-xl font-body text-muted-foreground">Hello, I'm</span>
         </div>
