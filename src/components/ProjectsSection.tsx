@@ -14,7 +14,7 @@ const projects = [
     icon: Globe,
     gradient: "from-primary to-secondary",
     github: "https://github.com/mavishsiraj",
-    videoId: "",
+    videoId: "/portfolio-demo.mp4",
     tree: {
       label: "Portfolio",
       children: [
