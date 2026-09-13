@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
 
 const navLinks = [
   { name: "About", href: "#about" },
@@ -13,6 +14,12 @@ const navLinks = [
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +28,10 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
@@ -49,17 +60,43 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile menu button */}
+        {/* Theme toggle - desktop */}
         <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden absolute right-4 w-10 h-10 flex items-center justify-center"
+          onClick={toggleTheme}
+          aria-label="Toggle dark mode"
+          className="hidden md:flex absolute right-4 w-10 h-10 rounded-full glass items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 group"
         >
-          {isMobileMenuOpen ? (
-            <X className="w-6 h-6 text-foreground" />
+          {mounted && theme === "dark" ? (
+            <Sun className="w-5 h-5 group-hover:rotate-45 transition-transform duration-500" />
           ) : (
-            <Menu className="w-6 h-6 text-foreground" />
+            <Moon className="w-5 h-5 group-hover:-rotate-12 transition-transform duration-500" />
           )}
         </button>
+
+        {/* Mobile: theme toggle + menu button */}
+        <div className="md:hidden absolute right-4 flex items-center gap-2">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle dark mode"
+            className="w-10 h-10 rounded-full glass flex items-center justify-center"
+          >
+            {mounted && theme === "dark" ? (
+              <Sun className="w-5 h-5" />
+            ) : (
+              <Moon className="w-5 h-5" />
+            )}
+          </button>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="w-10 h-10 flex items-center justify-center"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6 text-foreground" />
+            ) : (
+              <Menu className="w-6 h-6 text-foreground" />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
