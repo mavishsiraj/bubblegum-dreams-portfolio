@@ -130,7 +130,7 @@ const ProjectsSection = () => {
           {projects.map((project, index) => (
             <div
               key={project.title}
-              className={`group relative ${project.featured ? "md:col-span-2" : ""} ${isVisible ? "animate-scale-in" : "opacity-0"}`}
+              className={`group relative ${isVisible ? "animate-scale-in" : "opacity-0"}`}
               style={{ animationDelay: `${0.2 + index * 0.15}s` }}
             >
               <div className="glass rounded-3xl overflow-hidden h-full flex flex-col hover:scale-[1.02] transition-all duration-500"
