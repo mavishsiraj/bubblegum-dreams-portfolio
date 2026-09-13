@@ -1,43 +1,60 @@
 import { useEffect, useRef, useState } from "react";
-import { ExternalLink, Github, Globe, Trophy, ShoppingBag, Play, X } from "lucide-react";
+import { ExternalLink, Github, Globe, Trophy, Play, X } from "lucide-react";
 
 interface TreeNode {
   label: string;
   children?: TreeNode[];
 }
 
-const projects = [
+interface Project {
+  title: string;
+  description: string;
+  tech: string[];
+  icon: typeof Globe;
+  gradient: string;
+  github?: string;
+  live?: string;
+  videoId: string;
+  featured?: boolean;
+  tree: TreeNode;
+}
+
+const projects: Project[] = [
   {
-    title: "Personal Portfolio Website",
-    description: "A beautiful, animated portfolio website showcasing my skills, projects, and achievements with modern design and smooth animations.",
-    tech: ["React", "Tailwind CSS", "TypeScript", "Vite"],
-    icon: Globe,
-    gradient: "from-primary to-secondary",
-    github: "https://github.com/mavishsiraj",
-    videoId: "/portfolio-demo.mp4",
+    title: "AI Investment Research Agent",
+    description: "Give it a company name and it streams back a live research report — financials, technicals, and news sentiment — ending in a deterministic INVEST/PASS verdict. The scoring is plain code, not an LLM guess; the model is only ever allowed to interpret data or explain a decision that's already been made, with every response schema-validated so it can't return something the app doesn't expect.",
+    tech: ["Next.js", "TypeScript", "LangChain + Groq", "Zod"],
+    icon: Trophy,
+    gradient: "from-primary via-accent to-secondary",
+    github: "https://github.com/mavishsiraj/AI_Investment_app",
+    live: "https://aiinvestmentapp.netlify.app",
+    videoId: "",
+    featured: true,
     tree: {
-      label: "Portfolio",
+      label: "Investment Agent",
       children: [
-        { label: "Frontend", children: [{ label: "React" }, { label: "TypeScript" }] },
-        { label: "Styling", children: [{ label: "Tailwind" }, { label: "Animations" }] },
-        { label: "Build", children: [{ label: "Vite" }] },
+        { label: "Data", children: [{ label: "Yahoo Finance" }, { label: "NewsAPI" }] },
+        { label: "AI", children: [{ label: "LangChain" }, { label: "Groq + Zod" }] },
+        { label: "Scoring", children: [{ label: "Deterministic" }] },
       ],
     } as TreeNode,
   },
   {
-    title: "Perfume E-commerce Platform",
-    description: "Architected a full-stack platform with JWT auth on AWS EC2, supporting 1K+ concurrent users; engineered catalogue, cart, and order tracking modules.",
-    tech: ["Spring Boot", "Docker", "AWS EC2", "HTML/CSS/JS"],
-    icon: ShoppingBag,
-    gradient: "from-secondary to-accent",
-    github: "https://github.com/mavishsiraj",
-    videoId: "/perfume-demo.mp4",
+    title: "RFQ System — Real-Time British Auction",
+    description: "A full-stack RFQ platform where suppliers compete live by lowering bids, with an auction engine that auto-extends deadlines when late bids come in. Config-driven rules (trigger window, extension length, max extensions) drive the logic, with live rankings and a full activity log over Socket.IO — no page refresh needed.",
+    tech: ["React", "Node.js + Express", "Socket.IO", "SQLite"],
+    icon: Trophy,
+    gradient: "from-secondary via-primary to-accent",
+    github: "https://github.com/mavishsiraj/RFQ_system",
+    live: "https://rfqs.netlify.app/",
+    videoId: "",
+    featured: true,
     tree: {
-      label: "E-commerce",
+      label: "RFQ Auction",
       children: [
-        { label: "Backend", children: [{ label: "Spring Boot" }, { label: "JWT Auth" }] },
-        { label: "Deploy", children: [{ label: "Docker" }, { label: "AWS EC2" }] },
-        { label: "Frontend", children: [{ label: "HTML/CSS/JS" }] },
+        { label: "Realtime", children: [{ label: "Socket.IO" }, { label: "Auto-Extend" }] },
+        { label: "Backend", children: [{ label: "Express" }, { label: "SQLite" }] },
+        { label: "Frontend", children: [{ label: "React + Vite" }] },
       ],
     } as TreeNode,
   },
@@ -47,7 +64,7 @@ const projects = [
     tech: ["Node.js", "MongoDB", "React", "Groq API"],
     icon: Trophy,
     gradient: "from-accent to-primary",
-    github: "https://github.com/mavishsiraj",
+    github: "https://github.com/mavishsiraj/Budget_planner",
     videoId: "",
     tree: {
       label: "Finance App",
@@ -64,7 +81,7 @@ const projects = [
     tech: ["Flask", "MySQL", "Gemini API", "Python"],
     icon: Globe,
     gradient: "from-primary via-accent to-secondary",
-    github: "https://github.com/mavishsiraj",
+    github: "https://github.com/mavishsiraj/Ticket_Genius",
     videoId: "",
     tree: {
       label: "AI Ticketing",
@@ -113,7 +130,7 @@ const ProjectsSection = () => {
           {projects.map((project, index) => (
             <div
               key={project.title}
-              className={`group relative ${isVisible ? "animate-scale-in" : "opacity-0"}`}
+              className={`group relative ${project.featured ? "md:col-span-2" : ""} ${isVisible ? "animate-scale-in" : "opacity-0"}`}
               style={{ animationDelay: `${0.2 + index * 0.15}s` }}
             >
               <div className="glass rounded-3xl overflow-hidden h-full flex flex-col hover:scale-[1.02] transition-all duration-500"
@@ -210,8 +227,10 @@ const ProjectsSection = () => {
 
                 <div className="p-6 flex-1 flex flex-col">
                   {/* Badge */}
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs font-body font-semibold rounded-full w-fit mb-4">
-                    Project Explainer
+                  <span className={`inline-flex items-center gap-1 px-3 py-1 text-xs font-body font-semibold rounded-full w-fit mb-4 ${
+                    project.featured ? "bg-gradient-to-r from-primary to-secondary text-white" : "bg-primary/10 text-primary"
+                  }`}>
+                    {project.featured ? "✨ Newest" : "Project Explainer"}
                   </span>
 
                   <h3 className="font-body font-bold text-xl text-foreground mb-3 group-hover:text-primary transition-colors">
@@ -230,10 +249,18 @@ const ProjectsSection = () => {
 
                   {/* Links */}
                   <div className="flex gap-4">
-                    <a href={project.github} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors font-body text-sm">
-                      <Github className="w-4 h-4" /> Code
-                    </a>
+                    {project.github && (
+                      <a href={project.github} target="_blank" rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors font-body text-sm">
+                        <Github className="w-4 h-4" /> Code
+                      </a>
+                    )}
+                    {project.live && (
+                      <a href={project.live} target="_blank" rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors font-body text-sm">
+                        <ExternalLink className="w-4 h-4" /> Live Demo
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
