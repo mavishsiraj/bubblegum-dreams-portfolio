@@ -44,7 +44,7 @@ const ContactSection = () => {
         {/* Contact card */}
         <div className={`glass rounded-3xl p-8 md:p-12 text-center ${isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "0.2s" }}>
           {/* Email */}
-          
+          <a
             href="mailto:mavishsiraj1@gmail.com"
             className="inline-flex items-center gap-3 px-6 py-4 bg-primary text-primary-foreground rounded-full font-body font-semibold text-lg hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-primary/30 mb-8"
           >
@@ -54,13 +54,13 @@ const ContactSection = () => {
 
           {/* Social links */}
           <div className="flex justify-center gap-4 mb-8">
-            
+            <a
               href="mailto:mavishsiraj1@gmail.com"
               className="w-14 h-14 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 group"
             >
               <Mail className="w-6 h-6 group-hover:scale-110 transition-transform" />
             </a>
-            
+            <a
               href="https://www.linkedin.com/in/taiba-siraj/"
               target="_blank"
               rel="noopener noreferrer"
@@ -68,7 +68,7 @@ const ContactSection = () => {
             >
               <Linkedin className="w-6 h-6 group-hover:scale-110 transition-transform" />
             </a>
-            
+            <a
               href="https://github.com/mavishsiraj"
               target="_blank"
               rel="noopener noreferrer"
