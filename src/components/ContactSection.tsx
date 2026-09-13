@@ -88,8 +88,8 @@ const ContactSection = () => {
           <p className="font-body text-muted-foreground text-sm flex items-center justify-center gap-2">
             Made with <Heart className="w-4 h-4 text-primary animate-pulse" /> by Taiba Siraj
           </p>
-          <p className="font-body text-muted-foreground/60 text-xs mt-2">
-            © 2024 All rights reserved
+            <p className="font-body text-muted-foreground/60 text-xs mt-2">
+            © {new Date().getFullYear()} All rights reserved
           </p>
         </div>
 
