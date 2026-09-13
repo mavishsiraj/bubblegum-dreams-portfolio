@@ -44,8 +44,8 @@ const ContactSection = () => {
         {/* Contact card */}
         <div className={`glass rounded-3xl p-8 md:p-12 text-center ${isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "0.2s" }}>
           {/* Email */}
-          <a
-            href="mailto:taiba.siraj@example.com"
+          
+            href="mailto:mavishsiraj1@gmail.com"
             className="inline-flex items-center gap-3 px-6 py-4 bg-primary text-primary-foreground rounded-full font-body font-semibold text-lg hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-primary/30 mb-8"
           >
             <Send className="w-5 h-5" />
@@ -54,21 +54,21 @@ const ContactSection = () => {
 
           {/* Social links */}
           <div className="flex justify-center gap-4 mb-8">
-            <a
-              href="mailto:taiba.siraj@example.com"
+            
+              href="mailto:mavishsiraj1@gmail.com"
               className="w-14 h-14 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 group"
             >
               <Mail className="w-6 h-6 group-hover:scale-110 transition-transform" />
             </a>
-            <a
-              href="https://linkedin.com/in/"
+            
+              href="https://www.linkedin.com/in/taiba-siraj/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-14 h-14 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 group"
             >
               <Linkedin className="w-6 h-6 group-hover:scale-110 transition-transform" />
             </a>
-            <a
+            
               href="https://github.com/mavishsiraj"
               target="_blank"
               rel="noopener noreferrer"
@@ -88,7 +88,7 @@ const ContactSection = () => {
           <p className="font-body text-muted-foreground text-sm flex items-center justify-center gap-2">
             Made with <Heart className="w-4 h-4 text-primary animate-pulse" /> by Taiba Siraj
           </p>
-            <p className="font-body text-muted-foreground/60 text-xs mt-2">
+          <p className="font-body text-muted-foreground/60 text-xs mt-2">
             © {new Date().getFullYear()} All rights reserved
           </p>
         </div>
