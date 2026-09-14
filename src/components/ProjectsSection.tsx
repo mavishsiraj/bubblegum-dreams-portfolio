@@ -28,7 +28,7 @@ const projects: Project[] = [
     gradient: "from-primary via-accent to-secondary",
     github: "https://github.com/mavishsiraj/AI_Investment_app",
     live: "https://aiinvestmentapp.netlify.app",
-    videoId: "",
+    videoId: "/ai_investment.mp4",
     featured: true,
     tree: {
       label: "Investment Agent",
