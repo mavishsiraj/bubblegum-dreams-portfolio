@@ -47,7 +47,7 @@ const projects: Project[] = [
     gradient: "from-secondary via-primary to-accent",
     github: "https://github.com/mavishsiraj/RFQ_system",
     live: "https://rfqs.netlify.app/",
-    videoId: "",
+    videoId: "/rfq.mp4",
     featured: true,
     tree: {
       label: "RFQ Auction",
